@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Ateliê do Chapéu | Modelagem e Restauração Artesanal</title>
+<meta name="description" content="Modelagem, restauração e customização artesanal de chapéus. Antes e depois, mural de achados e atendimento direto pelo WhatsApp.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🤠</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<!-- A. TOPBAR -->
+<div class="topbar">
+  <div class="container">
+    <span id="topbarContato"></span>
+    <div class="topbar-redes" id="topbarRedes"></div>
+  </div>
+</div>
+
+<!-- B. HEADER -->
+<header class="site-header">
+  <div class="container header-inner">
+    <div class="marca">
+      <div class="logo-badge" id="logoBadge">AC</div>
+      <div>
+        <div class="marca-nome" id="marcaNome">Ateliê do Chapéu</div>
+        <div class="marca-slogan" id="marcaSlogan">Modelagem e restauração artesanal</div>
+      </div>
+    </div>
+    <div class="header-cta">
+      <a class="btn btn-primary btn-sm" id="btnWhatsHeader" href="#" target="_blank" rel="noopener">Falar no WhatsApp</a>
+    </div>
+  </div>
+</header>
+
+<!-- C. NAV -->
+<nav class="nav-bar">
+  <div class="container">
+    <ul class="nav-lista">
+      <li><a href="#servicos">Serviços</a></li>
+      <li><a href="#antes-depois">Antes e Depois</a></li>
+      <li><a href="#achados">Mural de Achados</a></li>
+      <li><a href="#sobre">Sobre</a></li>
+      <li><a href="#contato">Contato</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- D. HERO -->
+<section class="hero">
+  <div class="container">
+    <span class="hero-eyebrow">Feito à mão, chapéu por chapéu</span>
+    <h1>Seu chapéu, remodelado com a técnica que ele merece.</h1>
+    <p id="heroTexto">Modelagem de abas, ajuste de copa, aplicação de goma, customização e limpeza — tudo feito artesanalmente, com fotos de antes e depois pra você ver o resultado.</p>
+    <div class="hero-cta">
+      <a class="btn btn-primary" id="btnVerAntesDepois" href="#antes-depois">Ver antes e depois</a>
+      <a class="btn btn-outline" id="btnWhatsHero" href="#" target="_blank" rel="noopener">Pedir orçamento</a>
+    </div>
+  </div>
+</section>
+
+<!-- E. SERVIÇOS -->
+<section class="secao" id="servicos">
+  <div class="container">
+    <div class="secao-titulo">
+      <span class="eyebrow">O que eu faço</span>
+      <h2>Serviços artesanais</h2>
+      <p>Cada chapéu passa pelas técnicas certas pra voltar (ou ficar ainda melhor do que) novo.</p>
+    </div>
+    <div class="servicos-grid" id="servicosGrid"></div>
+  </div>
+</section>
+
+<!-- F. ANTES E DEPOIS -->
+<section class="secao secao-alt" id="antes-depois">
+  <div class="container">
+    <div class="secao-titulo">
+      <span class="eyebrow">O resultado fala</span>
+      <h2>Antes e depois</h2>
+      <p>Alguns chapéus que passaram pelo ateliê.</p>
+    </div>
+    <div class="ad-grid" id="adGrid"></div>
+  </div>
+</section>
+
+<!-- G. MURAL DE ACHADOS -->
+<section class="secao" id="achados">
+  <div class="container">
+    <div class="secao-titulo">
+      <span class="eyebrow">Compra e venda</span>
+      <h2>Mural de Achados</h2>
+      <p>Chapéus especiais que clientes decidiram vender — intermediados com a mesma confiança do ateliê.</p>
+    </div>
+    <div id="achadosConteudo"></div>
+  </div>
+</section>
+
+<!-- H. SOBRE -->
+<section class="secao secao-alt" id="sobre">
+  <div class="container">
+    <div class="secao-titulo">
+      <span class="eyebrow">Quem faz</span>
+      <h2 id="sobreTitulo">Sobre o ateliê</h2>
+    </div>
+    <div class="sobre-conteudo">
+      <p id="sobreTexto">Trabalho artesanal dedicado à cultura country — cada chapéu é tratado como único, com técnica de modelagem, curva de aba e acabamento que respeitam a identidade da peça e de quem usa.</p>
+    </div>
+  </div>
+</section>
+
+<!-- I. CONTATO -->
+<section class="secao" id="contato">
+  <div class="container">
+    <div class="info-loja">
+      <h2 style="color:#fff;">Fale comigo</h2>
+      <div class="info-loja-grid">
+        <div class="info-loja-bloco">
+          <h4>WhatsApp</h4>
+          <p><a id="infoWhats" href="#" target="_blank" rel="noopener"></a></p>
+        </div>
+        <div class="info-loja-bloco">
+          <h4>Instagram</h4>
+          <p><a id="infoInstagram" href="#" target="_blank" rel="noopener"></a></p>
+        </div>
+        <div class="info-loja-bloco">
+          <h4>Endereço</h4>
+          <p id="infoEndereco"></p>
+        </div>
+        <div class="info-loja-bloco">
+          <h4>Atendimento</h4>
+          <div id="infoHorarios"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- J. RODAPÉ -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <h5 id="footerNome">Ateliê do Chapéu</h5>
+        <p id="footerSlogan" style="margin-top:6px;">Modelagem e restauração artesanal.</p>
+      </div>
+      <div>
+        <h5>Navegação</h5>
+        <ul>
+          <li><a href="#servicos">Serviços</a></li>
+          <li><a href="#antes-depois">Antes e Depois</a></li>
+          <li><a href="#achados">Mural de Achados</a></li>
+          <li><a href="#contato">Contato</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Redes</h5>
+        <ul id="footerRedes"></ul>
+      </div>
+    </div>
+    <div class="footer-base">© <span id="footerAno"></span> — Feito com dedicação, um chapéu de cada vez. · <a href="/admin">Área administrativa</a></div>
+  </div>
+</footer>
+
+<div class="toast-container" id="toastContainer"></div>
+<div class="overlay" id="overlay" hidden>
+  <div class="modal-box" id="modalBox"></div>
+</div>
+
+<script src="assets/js/config.js"></script>
+<script src="assets/js/servicos.js"></script>
+<script src="assets/js/antesDepois.js"></script>
+<script src="assets/js/achados.js"></script>
+<script src="assets/js/app.js"></script>
+<script src="assets/js/assistente.js"></script>
+</body>
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Painel do Ateliê</title>
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+
+<div class="topbar">
+  <div><strong id="tituloLoja">Painel do Ateliê</strong> <span id="usuarioLogado"></span></div>
+  <button class="btn btn-secundario" id="btnSair">Sair</button>
+</div>
+
+<div class="container">
+
+  <div class="aviso">
+    Tudo que você salvar aqui atualiza direto o site (arquivos <code>config.js</code>, <code>servicos.js</code>,
+    <code>antesDepois.js</code> e <code>achados.js</code>). Depois de salvar, é só atualizar a página do site pra ver a mudança.
+  </div>
+
+  <div id="mensagemGeral"></div>
+
+  <!-- 1. Dados da loja -->
+  <div class="painel">
+    <h2>1. Dados do ateliê</h2>
+    <p class="desc">Informações que aparecem no topo, no rodapé e na seção de contato do site.</p>
+    <div class="grid-2">
+      <div class="campo"><label>Nome</label><input type="text" id="lojaNome"></div>
+      <div class="campo"><label>Slogan</label><input type="text" id="lojaSlogan"></div>
+    </div>
+    <div class="grid-2">
+      <div class="campo"><label>WhatsApp (só números, com DDI)</label><input type="text" id="lojaWhatsapp" placeholder="5500000000000"></div>
+      <div class="campo"><label>WhatsApp exibido no site</label><input type="text" id="lojaWhatsappExibicao" placeholder="(00) 00000-0000"></div>
+    </div>
+    <div class="grid-2">
+      <div class="campo"><label>Telefone exibido (opcional)</label><input type="text" id="lojaTelefoneExibicao"></div>
+      <div class="campo"><label>Instagram (@usuario)</label><input type="text" id="lojaInstagram"></div>
+    </div>
+    <div class="campo"><label>Facebook (link completo, opcional)</label><input type="text" id="lojaFacebook"></div>
+    <div class="campo"><label>Endereço / forma de atendimento</label><input type="text" id="lojaEndereco"></div>
+    <div class="campo"><label>Texto de destaque no topo (hero)</label><textarea id="lojaHeroTexto" rows="2"></textarea></div>
+    <div class="campo"><label>Título da seção "Sobre"</label><input type="text" id="lojaSobreTitulo"></div>
+    <div class="campo"><label>Texto da seção "Sobre"</label><textarea id="lojaSobreTexto" rows="3"></textarea></div>
+    <div class="campo"><label>Frase exibida quando o Mural de Achados estiver vazio</label><textarea id="lojaFraseMuralVazio" rows="2"></textarea></div>
+    <div class="rodape-painel">
+      <button class="btn btn-primary" id="btnSalvarLoja" style="width:auto;">Salvar dados do ateliê</button>
+    </div>
+  </div>
+
+  <!-- 2. Horários -->
+  <div class="painel">
+    <h2>2. Horários de atendimento</h2>
+    <p class="desc">Aparecem na seção de contato do site.</p>
+    <div id="listaHorarios"></div>
+    <div class="rodape-painel">
+      <button class="btn btn-secundario" id="btnNovoHorario" style="width:auto;">+ Novo horário</button>
+    </div>
+  </div>
+
+  <!-- 3. Serviços -->
+  <div class="painel">
+    <h2>3. Serviços</h2>
+    <p class="desc">Aparecem na seção "Serviços artesanais". Serviço inativo some do site na hora.</p>
+    <table class="lista">
+      <thead><tr><th style="width:60px;">Emoji</th><th>Nome</th><th>Descrição</th><th>Ativo</th><th></th></tr></thead>
+      <tbody id="corpoServicos"></tbody>
+    </table>
+    <div class="rodape-painel">
+      <button class="btn btn-secundario" id="btnNovoServico" style="width:auto;">+ Novo serviço</button>
+    </div>
+  </div>
+
+  <!-- 4. Antes e Depois -->
+  <div class="painel">
+    <h2>4. Antes e Depois</h2>
+    <p class="desc">O carro-chefe do site. Cada item tem duas fotos (antes/depois), um título e uma descrição opcional.</p>
+    <div id="listaAntesDepois"></div>
+    <div class="rodape-painel">
+      <button class="btn btn-secundario" id="btnNovoAD" style="width:auto;">+ Novo antes/depois</button>
+    </div>
+  </div>
+
+  <!-- 5. Mural de Achados -->
+  <div class="painel">
+    <h2>5. Mural de Achados</h2>
+    <p class="desc">Chapéus de clientes intermediados pra venda. Se não houver nenhum ativo, o site mostra automaticamente a frase configurada na seção 1.</p>
+    <div id="listaAchados"></div>
+    <div class="rodape-painel">
+      <button class="btn btn-secundario" id="btnNovoAchado" style="width:auto;">+ Novo achado</button>
+    </div>
+  </div>
+
+  <!-- 6. Trocar senha -->
+  <div class="painel">
+    <h2>6. Trocar senha de acesso</h2>
+    <div class="grid-2">
+      <div class="campo"><label>Senha atual</label><input type="password" id="senhaAtual"></div>
+      <div class="campo"><label>Nova senha</label><input type="password" id="novaSenha"></div>
+    </div>
+    <div class="rodape-painel">
+      <button class="btn btn-secundario" id="btnTrocarSenha" style="width:auto;">Trocar senha</button>
+    </div>
+  </div>
+
+</div>
+
+<script src="dashboard.js"></script>
+</body>
+</html>

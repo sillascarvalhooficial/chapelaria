@@ -1,0 +1,21 @@
+{
+  "name": "atelie-chapeu-admin-backend",
+  "version": "1.0.0",
+  "description": "Painel administrativo do site do Ateliê do Chapéu — libSQL/Turso para loja, serviços, antes/depois e mural de achados, fotos no Cloudinary",
+  "main": "server.js",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "@libsql/client": "^0.18.0",
+    "bcryptjs": "^2.4.3",
+    "cloudinary": "^2.11.0",
+    "dotenv": "^17.4.2",
+    "express": "^4.19.2",
+    "express-session": "^1.18.0",
+    "multer": "^2.4.0"
+  }
+}
