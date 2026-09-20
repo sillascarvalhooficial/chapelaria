@@ -232,6 +232,7 @@ async function regenerarAchadosJs() {
 
 /* ---------- app ---------- */
 const app = express();
+app.set('trust proxy', 1);
 app.use(express.json());
 app.use(session({
   secret: SESSION_SECRET,
