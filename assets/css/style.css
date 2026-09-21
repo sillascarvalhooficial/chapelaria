@@ -96,8 +96,9 @@ a{color:inherit; text-decoration:none;}
 /* ---------- D. HERO ---------- */
 .hero{
   background:
-    radial-gradient(120% 140% at 15% 0%, rgba(var(--cor-principal-rgb),.30), transparent 60%),
-    linear-gradient(160deg, var(--cor-secundaria), #0e0d0b 85%);
+    linear-gradient(rgba(10,8,5,.55), rgba(10,8,5,.72)),
+    url('../img/hero-bg.jpg');
+  background-size:cover; background-position:center 30%;
   color:#fff; padding:64px 0 70px; text-align:center;
 }
 .hero-eyebrow{
@@ -138,10 +139,11 @@ a{color:inherit; text-decoration:none;}
 }
 .servico-card h3{
   flex:1; display:flex; align-items:center; padding:0 22px; margin:0;
-  font-family:'Poppins',sans-serif;
-  font-size:19px; font-weight:800; letter-spacing:.05em; text-transform:uppercase; color:#2a1d10;
+  font-family:'Rye',serif;
+  font-size:22px; font-weight:400; letter-spacing:.01em; text-transform:uppercase; color:#2a1d10;
   text-shadow:0 1px 0 rgba(255,250,235,.4);
 }
+#servicos .secao-titulo h2{font-family:'Rye',serif; font-weight:400; letter-spacing:.01em;}
 
 /* ---------- F. ANTES E DEPOIS ---------- */
 .ad-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:20px;}
