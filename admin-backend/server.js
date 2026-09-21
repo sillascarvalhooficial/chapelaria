@@ -297,6 +297,19 @@ app.put('/api/loja', requireAuth, asyncHandler(async (req, res) => {
   await regenerarConfigJs();
   res.json({ ok: true, loja: await lerLoja() });
 }));
+app.post('/api/loja/logo', requireAuth, (req, res) => {
+  uploadMem.single('imagem')(req, res, async (erro) => {
+    if (erro) return res.status(400).json({ erro: erro.message || 'Falha no upload.' });
+    if (!req.file) return res.status(400).json({ erro: 'Nenhum arquivo enviado.' });
+    if (!CLOUDINARY_CONFIGURADO) return res.status(500).json({ erro: 'Upload de imagens não configurado no servidor (faltam as credenciais do Cloudinary).' });
+    try {
+      const resultado = await uploadParaCloudinary(req.file.buffer, 'atelie-chapeu/logo');
+      await salvarLoja({ logo: resultado.secure_url });
+      await regenerarConfigJs();
+      res.json({ ok: true, logo: resultado.secure_url });
+    } catch (e) { res.status(500).json({ erro: 'Falha ao enviar imagem: ' + e.message }); }
+  });
+});
 
 /* ---------- horários ---------- */
 app.get('/api/horarios', requireAuth, asyncHandler(async (req, res) => res.json(await lerHorarios())));

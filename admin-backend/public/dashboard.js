@@ -36,7 +36,17 @@ async function carregarLoja(){
   document.getElementById('lojaSobreTitulo').value = loja.sobreTitulo || '';
   document.getElementById('lojaSobreTexto').value = loja.sobreTexto || '';
   document.getElementById('lojaFraseMuralVazio').value = loja.fraseMuralVazio || '';
+  document.getElementById('lojaLogoPreview').innerHTML = loja.logo ? '<img class="foto-preview" src="'+fotoSrc(loja.logo)+'">' : '🤠';
 }
+document.getElementById('lojaLogoInput').addEventListener('change', function(e){
+  if(!e.target.files[0]) return;
+  const formData = new FormData();
+  formData.append('imagem', e.target.files[0]);
+  fetch('/api/loja/logo', { method:'POST', body: formData })
+    .then(r => { if(r.status===401){ window.location.href='login.html'; return; } return r.json(); })
+    .then(d => { if(d && !d.ok && d.erro) throw new Error(d.erro); mostrarMensagem('Logo atualizada.'); carregarLoja(); })
+    .catch(err => mostrarMensagem(err.message, 'erro'));
+});
 document.getElementById('btnSalvarLoja').addEventListener('click', async function(){
   try{
     await api('PUT', '/api/loja', {

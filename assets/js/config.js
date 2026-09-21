@@ -1,15 +1,15 @@
-/* Arquivo gerado automaticamente pelo painel admin em 20/09/2026, 18:44:50. Não edite manualmente. */
+/* Arquivo gerado automaticamente pelo painel admin em 21/09/2026, 16:27:11. Não edite manualmente. */
 
 const loja = {
   "id": 1,
-  "nome": "Ateliê do Chapéu",
+  "nome": "Queiroz Hats",
   "slug": "atelie-do-chapeu",
   "slogan": "Modelagem e restauração artesanal",
-  "logo": "",
-  "whatsapp": "5500000000000",
-  "whatsappExibicao": "(00) 00000-0000",
-  "telefoneExibicao": "(00) 0000-0000",
-  "instagram": "@ateliedochapeu",
+  "logo": "https://res.cloudinary.com/sc1beurq/image/upload/v1790018829/atelie-chapeu/logo.png",
+  "whatsapp": "44998759734",
+  "whatsappExibicao": "44998759734",
+  "telefoneExibicao": "(44)998759734",
+  "instagram": "@bq_hats",
   "facebook": "",
   "corPrincipal": "#C7A15A",
   "corSecundaria": "#1C1A17",
@@ -23,6 +23,8 @@ const loja = {
     {
       "id": 1,
       "dias": [
+        0,
+        1,
         2,
         3,
         4,
@@ -31,7 +33,7 @@ const loja = {
       ],
       "abre": "09:00",
       "fecha": "18:00",
-      "texto": "Ter a Sáb: 09:00 - 18:00 (com agendamento)",
+      "texto": "Seg a Dom: 09:00 - 18:00 (com agendamento)",
       "ordem": 0
     }
   ]

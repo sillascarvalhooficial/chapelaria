@@ -52,7 +52,14 @@ function renderTopbar(){
 function renderHeader(){
   document.getElementById('marcaNome').textContent = loja.nome;
   document.getElementById('marcaSlogan').textContent = loja.slogan;
-  document.getElementById('logoBadge').innerHTML = loja.logo ? '<img src="'+loja.logo+'" alt="'+escapeHtml(loja.nome)+'">' : initials(loja.nome);
+  const logoEl = document.getElementById('logoBadge');
+  if(loja.logo){
+    logoEl.className = 'logo-img-wrap';
+    logoEl.innerHTML = '<img src="'+loja.logo+'" alt="'+escapeHtml(loja.nome)+'">';
+  } else {
+    logoEl.className = 'logo-badge';
+    logoEl.innerHTML = initials(loja.nome);
+  }
   const linkWhats = linkWhatsApp('Olá! Vim pelo site e queria falar sobre um serviço.');
   document.getElementById('btnWhatsHeader').href = linkWhats;
   document.getElementById('btnWhatsHero').href = linkWhats;
