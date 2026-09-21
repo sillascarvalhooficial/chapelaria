@@ -75,7 +75,6 @@ function renderServicos(){
     '<div class="servico-card">'+
       '<div class="servico-icone">'+(s.emoji||'🤠')+'</div>'+
       '<h3>'+escapeHtml(s.nome)+'</h3>'+
-      '<p>'+escapeHtml(s.descricao)+'</p>'+
     '</div>'
   )).join('') || '<p style="text-align:center; color:var(--muted);">Serviços em breve.</p>';
 }

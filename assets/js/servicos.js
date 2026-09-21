@@ -1,4 +1,4 @@
-/* Arquivo gerado automaticamente pelo painel admin em 21/09/2026, 16:20:51. Não edite manualmente. */
+/* Arquivo gerado automaticamente pelo painel admin em 21/09/2026, 17:36:31. Não edite manualmente. */
 
 const servicos = [
   {
@@ -11,23 +11,15 @@ const servicos = [
   },
   {
     "id": 2,
-    "nome": "Curvar abas",
+    "nome": "Redução de aba",
     "descricao": "Curva de aba personalizada, no ponto certo pra cada rosto e estilo.",
     "emoji": "🌀",
     "ativo": true,
     "ordem": 1
   },
   {
-    "id": 3,
-    "nome": "Ajustar copa",
-    "descricao": "Ajuste de altura e formato da copa.",
-    "emoji": "🎩",
-    "ativo": true,
-    "ordem": 2
-  },
-  {
     "id": 4,
-    "nome": "Aplicar goma",
+    "nome": "Aplicação de goma",
     "descricao": "Goma artesanal pra dar rigidez e durabilidade à peça.",
     "emoji": "💧",
     "ativo": true,
@@ -43,7 +35,7 @@ const servicos = [
   },
   {
     "id": 6,
-    "nome": "Limpeza",
+    "nome": "Higienização",
     "descricao": "Limpeza profissional que devolve a aparência original do chapéu.",
     "emoji": "🧽",
     "ativo": true,

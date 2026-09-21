@@ -77,7 +77,7 @@ a{color:inherit; text-decoration:none;}
 }
 .logo-badge img{width:100%; height:100%; object-fit:cover;}
 .logo-img-wrap{display:flex; align-items:center; flex-shrink:0;}
-.logo-img-wrap img{height:190px; width:auto; max-width:400px; object-fit:contain; display:block;}
+.logo-img-wrap img{height:240px; width:auto; max-width:480px; object-fit:contain; display:block;}
 .marca-nome{font-size:19px; font-weight:700; color:#fff; line-height:1.1;}
 .marca-slogan{font-size:12px; color:rgba(255,255,255,.62); margin-top:3px;}
 .header-cta{display:flex; align-items:center; gap:10px;}
@@ -117,19 +117,21 @@ a{color:inherit; text-decoration:none;}
 .secao-titulo h2{font-size:clamp(24px,4vw,32px); margin-top:8px;}
 .secao-titulo p{color:var(--muted); font-size:14px; margin-top:10px;}
 
-/* ---------- E. SERVIÇOS ---------- */
-.servicos-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); gap:20px;}
+/* ---------- E. SERVIÇOS (fitas empilhadas) ---------- */
+.servicos-grid{display:flex; flex-direction:column; gap:12px; max-width:640px; margin:0 auto;}
 .servico-card{
-  background:var(--card); border:1px solid var(--border); border-radius:var(--radius-lg);
-  padding:28px 24px; text-align:center; box-shadow:var(--shadow-sm);
+  display:flex; align-items:stretch; background:var(--card); border:1px solid var(--border);
+  border-radius:10px; overflow:hidden; box-shadow:var(--shadow-sm);
 }
 .servico-icone{
-  width:56px; height:56px; border-radius:50%; margin:0 auto 16px; font-size:26px;
-  background:linear-gradient(160deg, rgba(var(--cor-principal-rgb),.18), rgba(var(--cor-principal-rgb),.05));
+  width:72px; flex-shrink:0; font-size:28px;
+  background:var(--cor-secundaria);
   display:flex; align-items:center; justify-content:center;
 }
-.servico-card h3{font-size:16px;}
-.servico-card p{font-size:13px; color:var(--muted); margin-top:8px;}
+.servico-card h3{
+  flex:1; display:flex; align-items:center; padding:0 20px; margin:0;
+  font-size:17px; font-weight:700; letter-spacing:.03em; text-transform:uppercase; color:var(--cor-secundaria);
+}
 
 /* ---------- F. ANTES E DEPOIS ---------- */
 .ad-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:20px;}
