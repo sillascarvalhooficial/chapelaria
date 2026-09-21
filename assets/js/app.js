@@ -56,9 +56,11 @@ function renderHeader(){
   if(loja.logo){
     logoEl.className = 'logo-img-wrap';
     logoEl.innerHTML = '<img src="'+loja.logo+'" alt="'+escapeHtml(loja.nome)+'">';
+    document.getElementById('marcaTextos').hidden = true;
   } else {
     logoEl.className = 'logo-badge';
     logoEl.innerHTML = initials(loja.nome);
+    document.getElementById('marcaTextos').hidden = false;
   }
   const linkWhats = linkWhatsApp('Olá! Vim pelo site e queria falar sobre um serviço.');
   document.getElementById('btnWhatsHeader').href = linkWhats;
