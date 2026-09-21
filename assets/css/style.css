@@ -143,29 +143,44 @@ a{color:inherit; text-decoration:none;}
   font-size:22px; font-weight:400; letter-spacing:.01em; text-transform:uppercase; color:#2a1d10;
   text-shadow:0 1px 0 rgba(255,250,235,.4);
 }
-#servicos .secao-titulo h2{font-family:'Rye',serif; font-weight:400; letter-spacing:.01em;}
+#servicos .secao-titulo h2, #antes-depois .secao-titulo h2, #achados .secao-titulo h2{font-family:'Rye',serif; font-weight:400; letter-spacing:.01em;}
 
-/* ---------- F. ANTES E DEPOIS ---------- */
+/* ---------- F. ANTES E DEPOIS (estilo cartaz antigo) ---------- */
 .ad-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:20px;}
-.ad-card{background:var(--card); border:1px solid var(--border); border-radius:var(--radius-lg); overflow:hidden; box-shadow:var(--shadow-sm);}
+.ad-card{
+  background:
+    linear-gradient(rgba(60,42,20,.06), rgba(60,42,20,.06)),
+    url('../img/paper-texture.png');
+  background-size:auto, 220px 220px;
+  border:3px solid #2a1d10; border-radius:4px; overflow:hidden;
+  box-shadow:inset 0 0 0 3px rgba(255,250,235,.55), 0 3px 0 rgba(0,0,0,.15);
+}
 .ad-fotos{display:grid; grid-template-columns:1fr 1fr;}
 .ad-foto-wrap{position:relative; aspect-ratio:1; overflow:hidden; background:linear-gradient(160deg, rgba(var(--cor-principal-rgb),.14), rgba(var(--cor-principal-rgb),.04));}
 .ad-foto-wrap img{width:100%; height:100%; object-fit:cover;}
 .ad-foto-wrap span{position:absolute; top:8px; left:8px; background:rgba(0,0,0,.6); color:#fff; font-size:10px; font-weight:800; text-transform:uppercase; letter-spacing:.05em; padding:3px 9px; border-radius:999px;}
 .ad-corpo{padding:16px 18px;}
-.ad-corpo h3{font-size:15px;}
-.ad-corpo p{font-size:12.5px; color:var(--muted); margin-top:6px;}
+.ad-corpo h3{font-family:'Rye',serif; font-weight:400; font-size:18px; letter-spacing:.01em; text-transform:uppercase; color:#2a1d10;}
+.ad-corpo p{font-size:12.5px; color:#5a4a35; margin-top:6px;}
 
-/* ---------- G. MURAL DE ACHADOS ---------- */
+/* ---------- G. MURAL DE ACHADOS (estilo cartaz antigo) ---------- */
 .achados-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:18px;}
-.achado-card{background:var(--card); border:1px solid var(--border); border-radius:var(--radius-lg); overflow:hidden; box-shadow:var(--shadow-sm); text-align:left;}
+.achado-card{
+  background:
+    linear-gradient(rgba(60,42,20,.06), rgba(60,42,20,.06)),
+    url('../img/paper-texture.png');
+  background-size:auto, 220px 220px;
+  border:3px solid #2a1d10; border-radius:4px; overflow:hidden;
+  box-shadow:inset 0 0 0 3px rgba(255,250,235,.55), 0 3px 0 rgba(0,0,0,.15);
+  text-align:left;
+}
 .achado-tile{aspect-ratio:1; background:linear-gradient(160deg, rgba(var(--cor-principal-rgb),.18), rgba(var(--cor-principal-rgb),.05)); display:flex; align-items:center; justify-content:center; font-size:40px; overflow:hidden;}
 .achado-tile img{width:100%; height:100%; object-fit:cover;}
 .achado-corpo{padding:14px 16px;}
 .achado-categoria{font-size:10.5px; font-weight:700; color:var(--cor-principal); text-transform:uppercase; letter-spacing:.04em;}
-.achado-nome{font-size:14.5px; font-weight:700; margin-top:4px;}
-.achado-desc{font-size:12px; color:var(--muted); margin-top:5px; line-height:1.45;}
-.achado-preco{font-size:16px; font-weight:800; color:var(--cor-secundaria); margin-top:10px;}
+.achado-nome{font-family:'Rye',serif; font-weight:400; font-size:17px; letter-spacing:.01em; text-transform:uppercase; margin-top:4px; color:#2a1d10;}
+.achado-desc{font-size:12px; color:#5a4a35; margin-top:5px; line-height:1.45;}
+.achado-preco{font-size:16px; font-weight:800; color:#2a1d10; margin-top:10px;}
 .achado-cta{display:block; margin-top:10px; text-align:center; padding:9px; border-radius:999px; background:var(--cor-secundaria); color:#fff; font-size:12px; font-weight:700; text-transform:uppercase;}
 
 .mural-vazio{
