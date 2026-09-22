@@ -486,6 +486,8 @@ app.post('/api/antes-depois/:id/foto/:tipo', requireAuth, (req, res) => {
 /* ---------- site público ---------- */
 app.get('/', (req, res) => res.sendFile(INDEX_HTML));
 app.use('/assets', express.static(ASSETS_DIR));
+// arquivo de verificação de propriedade do Google Search Console
+app.get('/googlea5b078852e53143b.html', (req, res) => res.sendFile(path.join(PROJECT_ROOT, 'googlea5b078852e53143b.html')));
 
 /* ---------- painel do dono ---------- */
 app.get('/admin', (req, res) => res.redirect('/admin/dashboard.html'));

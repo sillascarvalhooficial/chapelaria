@@ -1,4 +1,4 @@
-/* Arquivo gerado automaticamente pelo painel admin em 21/09/2026, 16:27:11. Não edite manualmente. */
+/* Arquivo gerado automaticamente pelo painel admin em 22/09/2026, 15:11:03. Não edite manualmente. */
 
 const loja = {
   "id": 1,

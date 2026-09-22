@@ -1,4 +1,4 @@
-/* Arquivo gerado automaticamente pelo painel admin em 21/09/2026, 17:36:31. Não edite manualmente. */
+/* Arquivo gerado automaticamente pelo painel admin em 22/09/2026, 15:11:04. Não edite manualmente. */
 
 const servicos = [
   {
