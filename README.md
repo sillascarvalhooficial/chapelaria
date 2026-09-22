@@ -127,10 +127,57 @@ credencial estiver faltando.
   ponta: login, leitura/escrita de serviços contra o banco remoto, upload de foto de achado (parou de
   verdade em `res.cloudinary.com`) e remoção (achado + foto no Cloudinary) — tudo sem erros.
 
-## Não testado / próximos passos
-- **Deploy real no Render** ainda não foi feito — Turso e Cloudinary já testados, só falta subir o
-  servidor lá e configurar as mesmas variáveis de ambiente.
-- Conteúdo é 100% placeholder — falta nome real do ateliê, WhatsApp real, fotos reais de antes/depois
-  e serviços conforme o negócio de verdade.
-- Antes de publicar: gerar `SESSION_SECRET` novo, trocar a senha padrão pela seção 6 do painel, e criar
-  as contas Turso/Cloudinary/Render (passo a passo na seção acima).
+## Status (2026-09-21) — publicado e em produção
+
+Projeto entregue pro cliente real **Queiroz Hats** (`queirozhats.com.br`). Site, painel, banco (Turso),
+imagens (Cloudinary) e domínio próprio testados de ponta a ponta em produção, não só localmente.
+
+- Site no ar: **https://www.queirozhats.com.br** (também responde em `https://chapelaria.onrender.com`)
+- Conteúdo real cadastrado (nome, logo, WhatsApp, serviços, fotos) — não é mais placeholder
+- Painel admin testado em produção (login, CRUD, upload de foto real pro Cloudinary)
+
+## Lições aprendidas nesta publicação (pra não repetir)
+
+Problemas que custaram tempo real nesta entrega — documentados pra não cair de novo neles num próximo
+projeto com essa mesma stack (Render + Turso + Cloudinary + registro.br):
+
+- **Render "Root Directory" derruba o auto-deploy silenciosamente.** Se o serviço tem Root Directory
+  configurado (ex: `admin-backend`), commits que só mexem em arquivos **fora** dessa pasta (CSS,
+  imagens, `index.html` na raiz do repo) **não disparam deploy automático** — sem erro, sem aviso,
+  simplesmente não builda. Sintoma: alguns commits sobem sozinhos (os que tocam `admin-backend/`),
+  outros exigem sempre "Manual Deploy". **Fix definitivo**: deixar Root Directory em branco e usar
+  `cd admin-backend && npm install` / `cd admin-backend && node server.js` como Build/Start Command.
+  Depois disso, todo commit dispara deploy automático de verdade.
+- **Sessão de login "funciona" local mas não persiste em produção atrás de proxy (Render/Heroku/etc).**
+  Com `cookie.secure: true` (ligado por `NODE_ENV=production`) e o Express não sabendo que está atrás
+  de um proxy HTTPS, o cookie de sessão não é enviado de volta — login retorna 200 mas a sessão nunca
+  gruda, te jogando de volta pro login a cada request. **Fix**: `app.set('trust proxy', 1)` logo após
+  criar o `app`, antes do middleware de sessão.
+- **Interface web do Turso mistura "grupos" (região/cluster) com bancos de verdade** na mesma lista —
+  um grupo vazio mostra "Get started and create your first database"; é preciso clicar em "Create
+  Database" *dentro* do grupo. Um token de **grupo** funciona pra qualquer banco daquele grupo.
+- **registro.br pode dizer "sucesso" e não publicar o registro de verdade.** O painel "Configurar Zona
+  DNS" mostrou os registros A e CNAME corretamente e confirmou "Zona DNS atualizada com sucesso", mas
+  consultando o servidor autoritativo (`a.auto.dns.br`) direto — via `nslookup` e via DNS-over-HTTPS do
+  Cloudflare (`cloudflare-dns.com/dns-query`) — o registro `A` não retornava resposta e o `CNAME` de
+  `www` dava **NXDOMAIN**, mesmo depois de mais de 3h e de apagar/recriar os registros. Não era cache
+  nem propagação normal (propagação de DNS do próprio registro.br costuma ser quase instantânea). Só
+  resolveu depois de abrir um chamado técnico pra **hostmaster@registro.br** descrevendo exatamente
+  esses testes (o problema era do lado deles). Detalhe da interface: o campo "Nome" **não aceita "@"**
+  pro domínio raiz — deixar em branco (ele já monta como `dominio.com.br` sozinho).
+- **Cache de preview de link (WhatsApp/redes sociais) não atualiza sozinho.** Sem tags Open Graph
+  (`og:title`, `og:description`, `og:image`), apps como WhatsApp adivinham a partir de `<title>` e
+  `<meta name="description">` — e, uma vez que alguém compartilha o link, o preview fica em cache no
+  app por dias, mesmo depois de corrigir o site. Fix: declarar `og:*` explicitamente; pra forçar
+  atualização de um link já compartilhado, usar o Facebook Sharing Debugger
+  (developers.facebook.com/tools/debug/) e clicar "Scrape Again".
+- **Foto de celular como logo geralmente vem com "sujeira".** A primeira versão da logo era um print
+  de galeria do celular (barra de status, botões do app, margem preta grande ao redor da arte) — precisou
+  recortar a UI do celular e aparar o excesso de fundo (`sharp().trim()` não funciona bem quando o
+  fundo não é uniforme por causa da UI; recorte manual da área + trim resolveu).
+
+## Próximos passos possíveis (não urgente)
+- Trocar `SESSION_SECRET` e a senha do painel de novo se este projeto for reaproveitado como base pra
+  outro cliente (cada instalação devia ter as suas).
+- Considerar `Health Check Path` (`/`) nas configurações do Render pra reduzir instabilidade durante
+  deploys (opcional, sem problema conhecido até aqui).
