@@ -175,6 +175,18 @@ projeto com essa mesma stack (Render + Turso + Cloudinary + registro.br):
   de galeria do celular (barra de status, botões do app, margem preta grande ao redor da arte) — precisou
   recortar a UI do celular e aparar o excesso de fundo (`sharp().trim()` não funciona bem quando o
   fundo não é uniforme por causa da UI; recorte manual da área + trim resolveu).
+- **Render free tier "dorme" depois de ~15min sem acesso** e mostra uma tela de carregamento própria do
+  Render (não é algo que dá pra customizar via código — aparece antes do nosso servidor sequer iniciar).
+  **Fix gratuito**: conta grátis no **UptimeRobot** (uptimerobot.com), monitor HTTP(s) apontando pra
+  `https://www.queirozhats.com.br`, intervalo de 5 minutos — mantém o serviço sempre acordado (cabe
+  dentro das 750h grátis do Render/mês, já que rodar 24/7 usa ~730h). Alternativa paga: qualquer plano
+  Render acima do free não dorme nunca.
+- **Arquivo de verificação solto na raiz (Google Search Console, Bing, etc.) — cuidado pra não expor o
+  projeto inteiro.** A tentação óbvia é usar `express.static(PROJECT_ROOT)` pra servir esses arquivos
+  soltos, mas isso expõe **todo o conteúdo do repositório** publicamente, incluindo `admin-backend/server.js`
+  (código-fonte do backend) e potencialmente segredos se algum dia um `.env` for commitado por engano.
+  Fix: uma rota explícita só pro arquivo específico (`app.get('/nome-do-arquivo.html', (req,res) => res.sendFile(...))`),
+  nunca um `express.static` apontando pra raiz do projeto.
 
 ## Próximos passos possíveis (não urgente)
 - Trocar `SESSION_SECRET` e a senha do painel de novo se este projeto for reaproveitado como base pra
