@@ -82,6 +82,12 @@ Requer **Node.js 18+**. Sem nenhuma variável de banco/imagem configurada no `.e
 - Painel: `http://localhost:5700/admin` (login padrão: `admin` / senha em `.env` — troque na seção 6
   do painel antes de entregar pra um cliente real)
 
+**"Esqueci minha senha" (2026-10-01):** a tela de login tem um link que redefine a senha do painel sem
+precisar da senha atual, usando a `MASTER_RESET_PASSWORD` do `.env` (mesma senha mestre em todos os
+projetos — só o Sillas sabe). Serve pra quando o cliente esquece a senha dele: você entra com o
+usuário dele + a senha mestre + uma senha nova. **Lembrar de configurar `MASTER_RESET_PASSWORD` também
+nas variáveis de ambiente do Render quando publicar**, senão o reset falha em produção.
+
 ## Como publicar de graça (só paga o domínio)
 
 1. **Turso** (banco de dados) — crie uma conta grátis em turso.tech (sem cartão), crie um banco:

@@ -33,6 +33,11 @@ body{
 .erro{background:#FEF2F2; color:var(--danger); border:1px solid #FCA5A5; padding:9px 12px; border-radius:8px; font-size:13px; margin-bottom:14px;}
 .sucesso{background:#F0FDF4; color:var(--success); border:1px solid #86EFAC; padding:9px 12px; border-radius:8px; font-size:13px; margin-bottom:14px;}
 .credenciais-padrao{margin-top:18px; font-size:11.5px; color:var(--muted); text-align:center;}
+.link-esqueci-senha{
+  display:block; width:100%; margin-top:14px; background:none; border:none; padding:0;
+  color:var(--muted); font-size:12.5px; text-decoration:underline; text-align:center; cursor:pointer;
+}
+.link-esqueci-senha:hover{color:var(--text);}
 
 .topbar{background:var(--cor-secundaria); color:#fff; padding:14px 20px; display:flex; align-items:center; justify-content:space-between;}
 .topbar strong{font-size:15px;}

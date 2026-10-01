@@ -290,6 +290,37 @@ app.put('/api/senha', requireAuth, asyncHandler(async (req, res) => {
   res.json({ ok: true });
 }));
 
+/* "Esqueci minha senha" — redefine sem precisar da senha atual, usando a senha mestre
+   (MASTER_RESET_PASSWORD no .env, combinada entre o Sillas e ninguém mais). Não fica
+   atrás de requireAuth de propósito: é exatamente pra quando ninguém consegue logar. */
+function senhaMestreValida(informada) {
+  const esperada = process.env.MASTER_RESET_PASSWORD;
+  if (!esperada) return false;
+  const bufA = Buffer.from(String(informada));
+  const bufB = Buffer.from(String(esperada));
+  if (bufA.length !== bufB.length) return false;
+  return crypto.timingSafeEqual(bufA, bufB);
+}
+app.post('/api/senha/resetar', asyncHandler(async (req, res) => {
+  const ip = req.ip;
+  if (ipBloqueado(ip)) return res.status(429).json({ erro: 'Muitas tentativas. Aguarde 1 minuto.' });
+  const { usuario, novaSenha, senhaMestre } = req.body || {};
+  if (!usuario || !novaSenha || !senhaMestre || novaSenha.length < 6) {
+    return res.status(400).json({ erro: 'Preencha usuário, a senha mestre e uma nova senha com pelo menos 6 caracteres.' });
+  }
+  if (!process.env.MASTER_RESET_PASSWORD) {
+    return res.status(500).json({ erro: 'Senha mestre não configurada no servidor (MASTER_RESET_PASSWORD no .env).' });
+  }
+  const admin = await dbGet('SELECT * FROM admin WHERE id = 1');
+  if (!admin || usuario !== admin.usuario || !senhaMestreValida(senhaMestre)) {
+    registrarFalha(ip);
+    return res.status(401).json({ erro: 'Usuário ou senha mestre incorretos.' });
+  }
+  limparFalhas(ip);
+  await dbRun('UPDATE admin SET senhaHash = ? WHERE id = 1', [bcrypt.hashSync(novaSenha, 10)]);
+  res.json({ ok: true });
+}));
+
 /* ---------- loja ---------- */
 app.get('/api/loja', requireAuth, asyncHandler(async (req, res) => res.json(await lerLoja())));
 app.put('/api/loja', requireAuth, asyncHandler(async (req, res) => {

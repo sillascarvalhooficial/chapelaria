@@ -24,6 +24,25 @@
       <button type="submit" class="btn btn-primary">Entrar</button>
     </form>
     <p class="credenciais-padrao">Login padrão de demonstração: <strong>admin</strong> / <strong>admin123</strong></p>
+    <button type="button" id="btnEsqueciSenha" class="link-esqueci-senha">Esqueci minha senha</button>
+
+    <form id="formResetarSenha" hidden>
+      <p class="sub">Redefina a senha usando a senha mestre (não precisa da senha atual).</p>
+      <div class="campo">
+        <label for="resetUsuario">Usuário</label>
+        <input type="text" id="resetUsuario" autocomplete="username" required>
+      </div>
+      <div class="campo">
+        <label for="resetSenhaMestre">Senha mestre</label>
+        <input type="password" id="resetSenhaMestre" required>
+      </div>
+      <div class="campo">
+        <label for="resetNovaSenha">Nova senha</label>
+        <input type="password" id="resetNovaSenha" autocomplete="new-password" minlength="6" required>
+      </div>
+      <button type="submit" class="btn btn-primary">Redefinir senha</button>
+      <button type="button" id="btnCancelarReset" class="link-esqueci-senha">Voltar pro login</button>
+    </form>
   </div>
 </div>
 <script src="login.js"></script>
