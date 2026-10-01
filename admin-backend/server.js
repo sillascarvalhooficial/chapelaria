@@ -94,7 +94,8 @@ async function criarSchema() {
     CREATE TABLE IF NOT EXISTS admin (
       id INTEGER PRIMARY KEY CHECK (id = 1),
       usuario TEXT NOT NULL,
-      senhaHash TEXT NOT NULL
+      senhaHash TEXT NOT NULL,
+      tokenVersion INTEGER NOT NULL DEFAULT 1
     );
     CREATE TABLE IF NOT EXISTS loja (
       id INTEGER PRIMARY KEY CHECK (id = 1),
@@ -127,6 +128,8 @@ async function criarSchema() {
       imagem TEXT, ativo INTEGER NOT NULL DEFAULT 1, ordem INTEGER NOT NULL
     );
   `);
+  // migração: bancos criados antes da coluna existir não ganham ela com CREATE TABLE IF NOT EXISTS
+  try { await db.execute('ALTER TABLE admin ADD COLUMN tokenVersion INTEGER NOT NULL DEFAULT 1'); } catch (_) { /* coluna já existe, ok ignorar */ }
 }
 
 /* ---------- seed inicial (só roda se o banco ainda não tem admin) ---------- */
@@ -254,10 +257,16 @@ function registrarFalha(ip) {
   tentativasLogin.set(ip, i);
 }
 function limparFalhas(ip) { tentativasLogin.delete(ip); }
-function requireAuth(req, res, next) {
-  if (req.session && req.session.autenticado) return next();
-  return res.status(401).json({ erro: 'Não autenticado.' });
-}
+// confere a sessão E se a senha não mudou desde o login (tokenVersion) — se mudou,
+// essa sessão é antiga (de antes da troca/reset) e deve ser derrubada na hora.
+const requireAuth = asyncHandler(async (req, res, next) => {
+  if (!req.session || !req.session.autenticado) return res.status(401).json({ erro: 'Não autenticado.' });
+  const admin = await dbGet('SELECT tokenVersion FROM admin WHERE id = 1');
+  if (!admin || admin.tokenVersion !== req.session.tokenVersion) {
+    return req.session.destroy(() => res.status(401).json({ erro: 'Sessão expirada (a senha foi alterada). Entre novamente.' }));
+  }
+  next();
+});
 
 /* ---------- auth ---------- */
 app.post('/api/login', asyncHandler(async (req, res) => {
@@ -273,6 +282,7 @@ app.post('/api/login', asyncHandler(async (req, res) => {
   limparFalhas(ip);
   req.session.autenticado = true;
   req.session.usuario = admin.usuario;
+  req.session.tokenVersion = admin.tokenVersion;
   res.json({ ok: true, usuario: admin.usuario });
 }));
 app.post('/api/logout', (req, res) => { req.session.destroy(() => res.json({ ok: true })); });
@@ -286,8 +296,9 @@ app.put('/api/senha', requireAuth, asyncHandler(async (req, res) => {
   }
   const admin = await dbGet('SELECT * FROM admin WHERE id = 1');
   if (!bcrypt.compareSync(senhaAtual, admin.senhaHash)) return res.status(401).json({ erro: 'Senha atual incorreta.' });
-  await dbRun('UPDATE admin SET senhaHash = ? WHERE id = 1', [bcrypt.hashSync(novaSenha, 10)]);
-  res.json({ ok: true });
+  await dbRun('UPDATE admin SET senhaHash = ?, tokenVersion = tokenVersion + 1 WHERE id = 1', [bcrypt.hashSync(novaSenha, 10)]);
+  // a troca de senha invalida a própria sessão atual também — força logar de novo com a senha nova
+  req.session.destroy(() => res.json({ ok: true }));
 }));
 
 /* "Esqueci minha senha" — redefine sem precisar da senha atual, usando a senha mestre
@@ -317,7 +328,8 @@ app.post('/api/senha/resetar', asyncHandler(async (req, res) => {
     return res.status(401).json({ erro: 'Usuário ou senha mestre incorretos.' });
   }
   limparFalhas(ip);
-  await dbRun('UPDATE admin SET senhaHash = ? WHERE id = 1', [bcrypt.hashSync(novaSenha, 10)]);
+  // tokenVersion + 1 derruba na hora qualquer sessão que já estivesse aberta com a senha antiga
+  await dbRun('UPDATE admin SET senhaHash = ?, tokenVersion = tokenVersion + 1 WHERE id = 1', [bcrypt.hashSync(novaSenha, 10)]);
   res.json({ ok: true });
 }));
 
